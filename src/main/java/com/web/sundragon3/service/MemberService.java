@@ -5,6 +5,7 @@ import com.web.sundragon3.entity.Member;
 import com.web.sundragon3.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    @Transactional
     public MemberSaveResponseDto saveMember(MemberSaveResquestDto requestDto) {
         Member newMember = new Member(requestDto.getName());
 
@@ -41,6 +43,7 @@ public class MemberService {
     }
 
 
+    @Transactional
     public MemberUpdateResponseDto updateMember(Long memberId, MemberUpdateRequestDto requestDto) {
         Member member = memberRepository.findById(memberId).orElseThrow(()-> new NullPointerException("멤버가 없습니다"));
 
@@ -49,6 +52,7 @@ public class MemberService {
         return new MemberUpdateResponseDto(member.getId(), member.getName());
     }
 
+    @Transactional
     public void deleteMember(Long memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(()-> new NullPointerException("멤버가 없습니다"));
 

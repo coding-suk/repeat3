@@ -3,6 +3,7 @@ package com.web.sundragon3.controller;
 import com.web.sundragon3.dto.*;
 import com.web.sundragon3.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,23 +15,23 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/members")
-    public MemberSaveResponseDto saveMember(@RequestBody MemberSaveResquestDto requestDto) {
-        return memberService.saveMember(requestDto);
+    public ResponseEntity<MemberSaveResponseDto> saveMember(@RequestBody MemberSaveResquestDto requestDto) {
+        return ResponseEntity.ok(memberService.saveMember(requestDto));
     }
 
     @GetMapping("/members")
-    public List<MemberSimpleResponseDto> getMembers() {
-        return memberService.getMembers();
+    public ResponseEntity<List<MemberSimpleResponseDto>> getMembers() {
+        return ResponseEntity.ok(memberService.getMembers());
     }
 
     @GetMapping("/members/{memberId}")
-    public MemberDetailResponseDto datailMamber(@PathVariable Long memberId) {
-        return memberService.getMember(memberId);
+    public ResponseEntity<MemberDetailResponseDto> datailMamber(@PathVariable Long memberId) {
+        return ResponseEntity.ok(memberService.getMember(memberId));
     }
 
     @PutMapping("/members/{memberId}")
-    public MemberUpdateResponseDto updateMember(@PathVariable Long memberId, @RequestBody MemberUpdateRequestDto requestDto) {
-        return memberService.updateMember(memberId, requestDto);
+    public ResponseEntity<MemberUpdateResponseDto> updateMember(@PathVariable Long memberId, @RequestBody MemberUpdateRequestDto requestDto) {
+        return ResponseEntity.ok(memberService.updateMember(memberId, requestDto));
     }
 
     @DeleteMapping("/members/{memberId}")
